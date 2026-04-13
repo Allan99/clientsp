@@ -1,9 +1,10 @@
 package com.devsuperior.clientsp.controllers;
 
-import com.devsuperior.clientsp.entities.Client;
-import com.devsuperior.clientsp.repositories.ClientRepository;
+import com.devsuperior.clientsp.dto.ClientDTO;
+import com.devsuperior.clientsp.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,11 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientController {
 
     @Autowired
-    private ClientRepository repository;
+    private ClientService service;
 
-    @GetMapping
-    public Client test(){
-        Client client = repository.findById(1L).get();
-        return client;
+    @GetMapping(value = "/{id}")
+    public ClientDTO findById(@PathVariable Long id){
+        return service.findById(id);
     }
 }
