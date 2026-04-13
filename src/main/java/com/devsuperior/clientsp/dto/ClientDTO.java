@@ -27,13 +27,28 @@ public class ClientDTO {
         this.children = children;
     }
 
-    public ClientDTO(Client client){
-        id = client.getId();
-        name = client.getName();
-        cpf = client.getCpf();
-        income = client.getIncome();
-        birthDate = client.getBirthDate();
-        children = client.getChildren();
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setIncome(Double income) {
+        this.income = income;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setChildren(Integer children) {
+        this.children = children;
     }
 
     public Long getId() {
