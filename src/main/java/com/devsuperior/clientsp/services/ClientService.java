@@ -39,6 +39,14 @@ public class ClientService {
         return modelMapper.map(client, ClientDTO.class);
     }
 
+    @Transactional
+    public ClientDTO update(Long id, ClientDTO dto){
+        Client client = repository.getReferenceById(id);
+        convertClientToDTO(client, dto);
+        client = repository.save(client);
+        return modelMapper.map(client, ClientDTO.class);
+    }
+
     public void convertClientToDTO(Client client, ClientDTO dto){
         client.setName(dto.getName());
         client.setIncome(dto.getIncome());
