@@ -47,6 +47,11 @@ public class ClientService {
         return modelMapper.map(client, ClientDTO.class);
     }
 
+    @Transactional
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
     public void convertClientToDTO(Client client, ClientDTO dto){
         client.setName(dto.getName());
         client.setIncome(dto.getIncome());
