@@ -2,6 +2,7 @@ package com.devsuperior.clientsp.dto;
 
 import com.devsuperior.clientsp.entities.Client;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
@@ -18,6 +19,7 @@ public class ClientDTO {
     private String cpf;
     @Positive(message = "The income must be a positive value")
     private Double income;
+    @PastOrPresent(message = "Field can't contain a future date")
     private LocalDate birthDate;
     private Integer children;
 
