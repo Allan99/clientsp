@@ -26,7 +26,7 @@ public class ClientService {
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id){
         Client client = repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Recurso não encontrado."));
+                () -> new ResourceNotFoundException("Resource not found"));
         return modelMapper.map(client, ClientDTO.class);
     }
 
@@ -55,12 +55,12 @@ public class ClientService {
     @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id){
         if(!repository.existsById(id)){
-            throw new ResourceNotFoundException("Recurso não encontrado.");
+            throw new ResourceNotFoundException("Resource not found");
         }
         try {
             repository.deleteById(id);
         }catch(DataIntegrityViolationException e){
-            throw new DatabaseException("Falha de integridade referencial.");
+            throw new DatabaseException("Failure in referential integrity");
         }
     }
 

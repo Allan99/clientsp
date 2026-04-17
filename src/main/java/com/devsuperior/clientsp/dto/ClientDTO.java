@@ -1,14 +1,22 @@
 package com.devsuperior.clientsp.dto;
 
 import com.devsuperior.clientsp.entities.Client;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
 public class ClientDTO {
 
     private Long id;
+    @Size(min = 3, max = 20, message = "The name size needs to be between 3 and 20 characters")
+    @NotBlank(message = "Field cannot be blank")
     private String name;
+    @Size(min = 11, max = 11, message = "Invalid CPF number: needs to have 11 digits")
+    @NotBlank
     private String cpf;
+    @Positive(message = "The income must be a positive value")
     private Double income;
     private LocalDate birthDate;
     private Integer children;
