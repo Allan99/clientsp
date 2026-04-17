@@ -5,6 +5,7 @@ import com.devsuperior.clientsp.dto.ValidationError;
 import com.devsuperior.clientsp.services.exceptions.DatabaseException;
 import com.devsuperior.clientsp.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.exception.DataException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,15 @@ public class ControllerExceptionHandler {
             err.addError(f.getField(), f.getDefaultMessage());
         }
 
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ResponseEntity<CustomError> database(ObjectNotFoundException e,
+                                                HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        CustomError err = new CustomError(Instant.now(), status.value(),
+                e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }
